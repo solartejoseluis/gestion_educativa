@@ -1,7 +1,7 @@
 <?php
 //creado el  2022-12-22
 // definición de variables
-$dsn="mysql:host=localhost;port=3306;dbname=GESTION_EDUCATIVA";
+$dsn="mysql:host=localhost;port=3306;dbname=GESTIONACADEMICA";
 $username="kiron";
 $password="123456";
 $options= array(

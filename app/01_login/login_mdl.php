@@ -6,7 +6,7 @@ $nptUser = $_POST['npt_user'];
 $nptPassword = $_POST['npt_password'];
 
 // CONECTAR BASE DE DATOS
-$conn = @mysqli_connect("localhost", "kiron", "123456","GESTION_EDUCATIVA");
+$conn = @mysqli_connect("localhost", "kiron", "123456","GESTIONACADEMICA");
 if (!$conn){
   echo "Fallo al conectar la bd";
 }else{

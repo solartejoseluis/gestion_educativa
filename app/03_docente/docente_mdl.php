@@ -16,13 +16,13 @@ switch ($_GET['accion']) {
     grupo_id,
     MODULOS.modulo_nombre,
     MODULOS.modulo_semestre,
-    grupo_nmr_horas,
     grupo_fch_inicio,
     grupo_fch_fin
     FROM GRUPO_MATERIAS
     INNER JOIN MODULOS
     ON MODULOS.modulo_id=GRUPO_MATERIAS.modulo_id
-    WHERE MODULOS.programa_id='1';
+    WHERE MODULOS.programa_id='1'
+    AND docente_id = ($_SESSION[usuario_id]);
     ";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
@@ -35,13 +35,13 @@ switch ($_GET['accion']) {
     grupo_id,
     MODULOS.modulo_nombre,
     MODULOS.modulo_semestre,
-    grupo_nmr_horas,
     grupo_fch_inicio,
     grupo_fch_fin
     FROM GRUPO_MATERIAS
     INNER JOIN MODULOS
     ON MODULOS.modulo_id=GRUPO_MATERIAS.modulo_id
-    WHERE MODULOS.programa_id='2';
+    WHERE MODULOS.programa_id='2'
+    AND docente_id = ($_SESSION[usuario_id]);
     ";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
