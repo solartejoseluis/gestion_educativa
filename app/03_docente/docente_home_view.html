@@ -53,8 +53,12 @@
         </div>
 
         <div class="input-group input-group-sm mb-1">
-          <span class="input-group-text" id="spn_docente"> DOCENTE</span>
-          <input type="text" class="form-control" />
+          <span class="input-group-text" "> DOCENTE</span>
+          <input 
+          type="text" 
+          class="form-control"
+          id="npt_docente_nombres"
+           />
         </div>
       </section>
     </div>
@@ -70,6 +74,7 @@
               <td>Cod/grupo</td>
               <td>Modulo</td>
               <td>Semestre</td>
+              <td>Jornada</td>
               <td>Fecha/Ini</td>
               <td>Fecha/Fin</td>
               <td></td>
@@ -89,6 +94,7 @@
               <td>Cod/grupo</td>
               <td>Modulo</td>
               <td>Semestre</td>
+              <td>Jornada</td>
               <td>Fecha/Ini</td>
               <td>Fecha/Fin</td>
               <td></td>
@@ -136,7 +142,7 @@
 
                   <div class="row">
                     <section class="table-responsive" id="tabla">
-                      <table class="table display compact cell-border" id="tbl_domi_por_salir">
+                      <table class="table display compact cell-border" id="tbl_grupo_notas">
                         <thead>
                           <tr>
                             <td colspan="2">ESTUDIANTES</td>
@@ -166,12 +172,7 @@
                           <tr>
                             <td>Nombres</td>
                             <td>Apellidos</td>
-                            <td>Nota1</td>
-                            <td>Nota2</td>
-                            <td>Nota3</td>
-                            <td>Nota4</td>
-                            <td>Definitiva</td>
-                            <td>Acumulado</td>
+
                           </tr>
                         </thead>
                       </table>
@@ -192,7 +193,7 @@
       </div>
     </div>
   </div>
-  <!-- fin modal todas las gestiones agrupadas por dia -->
+  <!-- fin modal-->
 
   <!-- SCRIPTS -->
   <!-- CDN jquery 3.6.1 js -->

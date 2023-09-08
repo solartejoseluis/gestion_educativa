@@ -11,16 +11,33 @@ $usuarioId = $_SESSION['usuario_id'];
 
 switch ($_GET['accion']) {
 
+
+  case 'carga_pagina_principal':
+    $sql = "SELECT
+    CONCAT(usuario_nombres,' ',usuario_apellidos) AS nombres_completos
+    FROM USUARIOS
+    WHERE usuario_id = ($_SESSION[usuario_id]);
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
+
+
   case 'carga_dttbl_grupos_asignados_aso':
     $sql = "SELECT
     grupo_id,
     MODULOS.modulo_nombre,
     MODULOS.modulo_semestre,
+    JORNADAS.jornada_nombre,
     grupo_fch_inicio,
     grupo_fch_fin
     FROM GRUPO_MATERIAS
     INNER JOIN MODULOS
     ON MODULOS.modulo_id=GRUPO_MATERIAS.modulo_id
+    INNER JOIN JORNADAS
+    ON JORNADAS.jornada_id=GRUPO_MATERIAS.jornada_id
     WHERE MODULOS.programa_id='1'
     AND docente_id = ($_SESSION[usuario_id]);
     ";
@@ -35,11 +52,14 @@ switch ($_GET['accion']) {
     grupo_id,
     MODULOS.modulo_nombre,
     MODULOS.modulo_semestre,
+    JORNADAS.jornada_nombre,
     grupo_fch_inicio,
     grupo_fch_fin
     FROM GRUPO_MATERIAS
     INNER JOIN MODULOS
     ON MODULOS.modulo_id=GRUPO_MATERIAS.modulo_id
+    INNER JOIN JORNADAS
+    ON JORNADAS.jornada_id=GRUPO_MATERIAS.jornada_id
     WHERE MODULOS.programa_id='2'
     AND docente_id = ($_SESSION[usuario_id]);
     ";
@@ -49,4 +69,20 @@ switch ($_GET['accion']) {
     echo json_encode($result);
     break;
 
+
+  case 'listar_grupo_notas':
+    $sql = "SELECT
+	MATRICULADOS.estudiante_id,
+      ESTUDIANTES.estudiante_nombres,
+      ESTUDIANTES.estudiante_apellidos
+      FROM MATRICULADOS
+      INNER JOIN ESTUDIANTES
+      ON ESTUDIANTES.estudiante_id=MATRICULADOS.estudiante_id
+      WHERE grupo_id = $_GET[grupo_id];
+";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
 };
