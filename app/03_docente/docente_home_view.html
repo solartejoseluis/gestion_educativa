@@ -47,10 +47,10 @@
       <h1>GRUPOS ASIGNADOS</h1>
 
       <section class="row col-md-6" id="encabezado_notas">
-        <div class="input-group input-group-sm mb-1 mt-1">
+        <!-- <div class="input-group input-group-sm mb-1 mt-1">
           <span class="input-group-text" id="spn_periodo">PERIODO</span>
           <input type="text" class="form-control" />
-        </div>
+        </div> -->
 
         <div class="input-group input-group-sm mb-1">
           <span class="input-group-text" "> DOCENTE</span>
@@ -107,17 +107,22 @@
   <!-- fin del contenido de la pagina -->
 
   <!-- MDL REGISTRO DE NOTAS DEL GRUPO-->
-  <div class="modal fade" id="mdl_registro_calificaciones">
+  <div class="modal fade" id="mdl_calificaciones_grupo">
     <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5">REGISTRO DE CALIFICACIONES</h1>
+          <h1 class="modal-title fs-5">CALIFICACIONES DEL GRUPO</h1>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            X
+          </button>
         </div>
         <div class="modal-body">
           <div class="container-fluid">
             <div class="row">
-              <div class="container">
-                <section class="row col-md-6 justify-content-start" id="encabezado_notas">
+              <!-- <div class="container"> -->
+
+                <!-- ENCABEZADO DEL MODAL -->
+                <!-- <section class="row col-md-6 justify-content-start" id="encabezado_notas">
                   <div class="input-group input-group-sm mb-1 mt-1">
                     <span class="input-group-text" id="spn_periodo">PERIODO</span>
                     <input type="text" class="form-control" />
@@ -135,16 +140,19 @@
                       DOCENTE</span>
                     <input type="text" class="form-control" />
                   </div>
-                </section>
-
-                <section class="container col-md-12">
-                  <h3>CALIFICACIONES DEL GRUPO</h3>
+                </section> -->
+<!-- 
+                  <h3>CALIFICACIONES DEL GRUPO</h3> -->
 
                   <div class="row">
                     <section class="table-responsive" id="tabla">
-                      <table class="table display compact cell-border" id="tbl_grupo_notas">
+                      <table 
+                      class="table display compact cell-border" cellspacing="0" 
+                      width="100%" 
+                      id="tbl_calificaciones_grupo">
+                      
                         <thead>
-                          <tr>
+                          <!-- <tr>
                             <td colspan="2">ESTUDIANTES</td>
                             <td>
                               <button class="btn btn-primary" id="btn_nota1">
@@ -168,32 +176,109 @@
                             </td>
                             <td></td>
                             <td></td>
-                          </tr>
+                            <td></td>
+                          </tr> -->
                           <tr>
+                            <!-- <td>id</td> -->
                             <td>Nombres</td>
                             <td>Apellidos</td>
+                            <td>Nota1</td>
+                            <td>Nota2</td>
+                            <td>Nota3</td>
+                            <td>Nota4</td>
+                            <td>Defi</td>
+                            <td>Habi</td>
+                            <td></td>
 
                           </tr>
                         </thead>
                       </table>
                     </section>
                   </div>
-                </section>
-              </div>
             </div>
             <!-- finaliza datatables del modal -->
           </div>
         </div>
-        <!-- inicia footer modal nueva venta -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            X
-          </button>
-        </div>
+
       </div>
     </div>
   </div>
   <!-- fin modal-->
+
+
+
+  <!-- MDL NOTA1-->
+  <div class="modal fade" id="mdl_agregar_nota">
+    <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">NOTA 1</h1>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            X
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <form id="frm_nueva_venta">
+            <!-- NPT OCULTOS EN EL MODAL -->
+            <div class="row">
+              <input type="hidden" class="form-control" id="npt_turno_id_modal" />
+              <input type="hidden" class="form-control" id="npt_venta_id" />
+              <input type="hidden" class="form-control" id="npt_venta_tipo" />
+            </div>
+            <!-- NOMBRES -->
+            <div class="selectVendedor col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Estudiante</span>
+              <select class="form-select form-select-sm" id="slct_vendedor"></select>
+              <input type="hidden" class="form-control" id="npt_vendedor_id" />
+            </div>
+
+              
+            <!-- NOTA1  -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Nota1</span>
+              <input type="text" class="form-control" id="npt_venta_nombre_proveedor" placeholder="Nota1" />
+            </div>
+
+            <!-- NOTA2 -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Nota2</span>
+              <input type="hidden" class="form-control" id="npt_venta_costo_producto_base" />
+              <input type="text" class="form-control" id="npt_venta_costo_producto" placeholder="Nota2" />
+            </div>
+
+            <!-- NOTA3 -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Nota3</span>
+              <input type="hidden" class="form-control" id="npt_venta_valor_venta_base" />
+              <input type="text" class="form-control" id="npt_venta_valor_venta" placeholder="Nota3" />
+            </div>
+
+
+
+                        <!-- NOTA4 -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Nota3</span>
+              <input type="hidden" class="form-control" id="npt_venta_valor_venta_base" />
+              <input type="text" class="form-control" id="npt_venta_valor_venta" placeholder="Nota4" />
+            </div>
+
+          </form>
+
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- fin modal-->
+
+
+
+
+
 
   <!-- SCRIPTS -->
   <!-- CDN jquery 3.6.1 js -->

@@ -70,15 +70,21 @@ switch ($_GET['accion']) {
     break;
 
 
-  case 'listar_grupo_notas':
+  case 'listar_calificaciones_grupo':
     $sql = "SELECT
-	MATRICULADOS.estudiante_id,
-      ESTUDIANTES.estudiante_nombres,
-      ESTUDIANTES.estudiante_apellidos
-      FROM MATRICULADOS
-      INNER JOIN ESTUDIANTES
-      ON ESTUDIANTES.estudiante_id=MATRICULADOS.estudiante_id
-      WHERE grupo_id = $_GET[grupo_id];
+    ESTUDIANTES.estudiante_id,
+    ESTUDIANTES.estudiante_nombres,
+    ESTUDIANTES.estudiante_apellidos,
+    cal_nota1,
+    cal_nota2,
+    cal_nota3,
+    cal_nota4,
+    cal_notadef,
+    cal_nota_habilitacion
+FROM
+    CALIFICACIONES
+INNER JOIN ESTUDIANTES ON CALIFICACIONES.estudiante_id = ESTUDIANTES.estudiante_id
+WHERE grupo_id=$_GET[grupo_id];
 ";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
