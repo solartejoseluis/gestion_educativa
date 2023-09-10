@@ -55,6 +55,14 @@ document.addEventListener("DOMContentLoaded", function () {
       paging: false,
       destroy: true,
     });
+    // BTN VER GRUPO ASIGNADO ASO
+    $("#tbl_grupos_asignados_aso tbody").on("click", "button.btnVerGrupoAsignadoAso", function () {
+      let registro = listado.row($(this).parents("tr")).data();
+      $("#mdl_calificaciones_grupo").modal("show");
+      dttbl_listar_calificaciones_grupo(registro.grupo_id);
+    });
+
+
   }
 
   // DTTBL GRUPOS ASIGNADOS MD
@@ -91,12 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
       destroy: true,
     });
 
-    // BTN VER GRUPO ASIGNADO ASO
-    $("#tbl_grupos_asignados_aso tbody").on("click", "button.btnVerGrupoAsignadoAso", function () {
-      let registro = listado.row($(this).parents("tr")).data();
-      $("#mdl_calificaciones_grupo").modal("show");
-      dttbl_listar_calificaciones_grupo(registro.grupo_id);
-    });
 
 
     // BTN VER GRUPO ASIGNADO MD
@@ -105,6 +107,9 @@ document.addEventListener("DOMContentLoaded", function () {
       $("#mdl_calificaciones_grupo").modal("show");
       dttbl_listar_calificaciones_grupo(registro.grupo_id);
     });
+
+
+
 
   } // final dttbl de grupos asignados
 
