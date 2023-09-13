@@ -72,23 +72,98 @@ switch ($_GET['accion']) {
 
   case 'listar_calificaciones_grupo':
     $sql = "SELECT
-    ESTUDIANTES.estudiante_id,
-    ESTUDIANTES.estudiante_nombres,
-    ESTUDIANTES.estudiante_apellidos,
-    cal_nota1,
-    cal_nota2,
-    cal_nota3,
-    cal_nota4,
-    cal_notadef,
-    cal_nota_habilitacion
-FROM
-    CALIFICACIONES
-INNER JOIN ESTUDIANTES ON CALIFICACIONES.estudiante_id = ESTUDIANTES.estudiante_id
-WHERE grupo_id=$_GET[grupo_id];
-";
+      cal_id,
+      grupo_id,
+      ESTUDIANTES.estudiante_id,
+      ESTUDIANTES.estudiante_nombres,
+      ESTUDIANTES.estudiante_apellidos,
+      cal_nota1,
+      cal_nota2,
+      cal_nota3,
+      cal_nota4,
+      cal_nota_final,
+      cal_nota_habilitacion
+    FROM
+      CALIFICACIONES
+    INNER JOIN ESTUDIANTES ON CALIFICACIONES.estudiante_id = ESTUDIANTES.estudiante_id
+    WHERE grupo_id=$_GET[grupo_id];
+    ";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
+    break;
+
+  case 'listar_notas_estudiante':
+    $sql = "SELECT
+    CALIFICACIONES.cal_id,
+    CALIFICACIONES.estudiante_id,
+    CALIFICACIONES.grupo_id,
+    CONCAT(ESTUDIANTES.estudiante_nombres,' ', ESTUDIANTES.estudiante_apellidos) AS estudiante_nombres,
+    cal_nota1,
+    cal_nota1_tipo,
+    cal_nota2,
+    cal_nota2_tipo,
+    cal_nota3,
+    cal_nota3_tipo,
+    cal_nota4,
+    cal_nota4_tipo,
+    cal_nota_final,
+    cal_nota_final_tipo
+    FROM CALIFICACIONES
+    INNER JOIN ESTUDIANTES
+    ON ESTUDIANTES.estudiante_id=CALIFICACIONES.estudiante_id
+    WHERE CALIFICACIONES.estudiante_id=$_GET[estudiante_id]
+    AND grupo_id=$_GET[grupo_id]
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
+
+  case 'carga_slct_calificacion_tipo':
+    $sql = "SELECT
+  cal_tipo_id,
+  cal_tipo_nombre
+  FROM CALIFICACIONES_TIPO
+  ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $users_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo '<option value="0">Seleccionar</option>';
+    foreach ($users_result as $row) {
+      echo '<option value="' . $row["cal_tipo_id"] . '">' . $row["cal_tipo_nombre"] . '</option>';
+    };
+    break;
+
+  case 'modificar_notas':
+    $sql = "UPDATE CALIFICACIONES SET
+    cal_nota1= '$_POST[cal_nota1]',
+    cal_nota1_tipo= '$_POST[cal_nota1_tipo]',
+    cal_nota2= '$_POST[cal_nota2]',
+    cal_nota2_tipo= '$_POST[cal_nota2_tipo]',
+    cal_nota3= '$_POST[cal_nota3]',
+    cal_nota3_tipo= '$_POST[cal_nota3_tipo]',
+    cal_nota4= '$_POST[cal_nota4]',
+    cal_nota4_tipo= '$_POST[cal_nota4_tipo]',
+    cal_nota_final= '$_POST[cal_nota_final]',
+    cal_nota_final_tipo= '$_POST[cal_nota_final_tipo]'
+    WHERE cal_id=$_GET[cal_id]
+    AND(
+      cal_nota1 IS NULL OR
+    cal_nota1_tipo IS NULL OR
+    cal_nota2 IS NULL OR
+    cal_nota2_tipo IS NULL OR
+    cal_nota3 IS NULL OR
+    cal_nota3_tipo IS NULL OR
+    cal_nota4 IS NULL OR
+    cal_nota4_tipo IS NULL OR
+    cal_nota_final IS NULL OR
+    cal_nota_final_tipo IS NULL
+    )
+    ";
+    $response = $pdo->exec($sql);
+    echo json_encode($response);
     break;
 };

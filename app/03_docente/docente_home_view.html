@@ -55,15 +55,14 @@
         <div class="input-group input-group-sm mb-1">
           <span class="input-group-text" "> DOCENTE</span>
           <input 
-          type="text" 
-          class="form-control"
-          id="npt_docente_nombres"
-           />
+          type=" text" class="form-control" id="npt_docente_nombres" />
         </div>
       </section>
     </div>
   </section>
 
+
+  <!-- DTTBL ASO -->
   <div class="row">
     <h2>PROGRAMA AUXILIAR EN SALUD ORAL</h2>
     <div class="container col-md-10">
@@ -84,6 +83,7 @@
       </section>
     </div>
   </div>
+  <!-- DTTBL MD -->
   <div class="row">
     <h2>PROGRAMA AUXILIAR EN MECÁNICA DENTAL</h2>
     <div class="container col-md-10">
@@ -106,168 +106,143 @@
   </div>
   <!-- fin del contenido de la pagina -->
 
+
+
   <!-- MDL REGISTRO DE NOTAS DEL GRUPO-->
   <div class="modal fade" id="mdl_calificaciones_grupo">
     <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5">CALIFICACIONES DEL GRUPO</h1>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             X
           </button>
         </div>
         <div class="modal-body">
           <div class="container-fluid">
             <div class="row">
-              <!-- <div class="container"> -->
-
-                <!-- ENCABEZADO DEL MODAL -->
-                <!-- <section class="row col-md-6 justify-content-start" id="encabezado_notas">
-                  <div class="input-group input-group-sm mb-1 mt-1">
-                    <span class="input-group-text" id="spn_periodo">PERIODO</span>
-                    <input type="text" class="form-control" />
-                  </div>
-                  <div class="input-group input-group-sm mb-1">
-                    <span class="input-group-text" id="spn_programa">PROGRAMA</span>
-                    <input type="text" class="form-control" />
-                  </div>
-                  <div class="input-group input-group-sm mb-1">
-                    <span class="input-group-text" id="spn_materia">MODULO</span>
-                    <input type="text" class="form-control" />
-                  </div>
-                  <div class="input-group input-group-sm mb-1">
-                    <span class="input-group-text" id="spn_docente">
-                      DOCENTE</span>
-                    <input type="text" class="form-control" />
-                  </div>
-                </section> -->
-<!-- 
-                  <h3>CALIFICACIONES DEL GRUPO</h3> -->
-
-                  <div class="row">
-                    <section class="table-responsive" id="tabla">
-                      <table 
-                      class="table display compact cell-border" cellspacing="0" 
-                      width="100%" 
-                      id="tbl_calificaciones_grupo">
-                      
-                        <thead>
-                          <!-- <tr>
-                            <td colspan="2">ESTUDIANTES</td>
-                            <td>
-                              <button class="btn btn-primary" id="btn_nota1">
-                                &nbsp+&nbsp
-                              </button>
-                            </td>
-                            <td>
-                              <button class="btn btn-primary" id="btn_nota2">
-                                &nbsp+&nbsp
-                              </button>
-                            </td>
-                            <td>
-                              <button class="btn btn-primary" id="btn_nota3">
-                                &nbsp+&nbsp
-                              </button>
-                            </td>
-                            <td>
-                              <button class="btn btn-primary" id="btn_nota4">
-                                &nbsp+&nbsp
-                              </button>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr> -->
-                          <tr>
-                            <!-- <td>id</td> -->
-                            <td>Nombres</td>
-                            <td>Apellidos</td>
-                            <td>Nota1</td>
-                            <td>Nota2</td>
-                            <td>Nota3</td>
-                            <td>Nota4</td>
-                            <td>Defi</td>
-                            <td>Habi</td>
-                            <td></td>
-
-                          </tr>
-                        </thead>
-                      </table>
-                    </section>
-                  </div>
+              <section class="table-responsive" id="tabla">
+                <table class="table display compact cell-border" cellspacing="0" width="100%"
+                  id="tbl_calificaciones_grupo">
+                  <thead>
+                    <tr>
+                      <!-- <td>id</td> -->
+                      <td>Nombres</td>
+                      <td>Apellidos</td>
+                      <td>Nota1</td>
+                      <td>Nota2</td>
+                      <td>Nota3</td>
+                      <td>Nota4</td>
+                      <td>Defi</td>
+                      <td>Habi</td>
+                      <td></td>
+                    </tr>
+                  </thead>
+                </table>
+              </section>
             </div>
             <!-- finaliza datatables del modal -->
           </div>
         </div>
-
       </div>
     </div>
   </div>
   <!-- fin modal-->
 
-
-
-  <!-- MDL NOTA1-->
+  <!-- MDL AGREGAR NOTAS -->
   <div class="modal fade" id="mdl_agregar_nota">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5">NOTA 1</h1>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            X
-          </button>
+          <h1 class="modal-title fs-5"> Agregar Nota</h1>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
         </div>
         <div class="modal-body">
 
-          <form id="frm_nueva_venta">
+          <form id="frm_agregar_nota">
             <!-- NPT OCULTOS EN EL MODAL -->
             <div class="row">
-              <input type="hidden" class="form-control" id="npt_turno_id_modal" />
-              <input type="hidden" class="form-control" id="npt_venta_id" />
-              <input type="hidden" class="form-control" id="npt_venta_tipo" />
+              <input type="hidden" class="form-control" id="npt_cal_id" />
+              <input type="hidden" class="form-control" id="npt_estudiante_id" />
+              <input type="hidden" class="form-control" id="npt_grupo_id" />
             </div>
 
 
-           <!--  ESTUDIANTE -->
+            <!--  NPT ESTUDIANTE -->
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Estudiante</span>
-              <input type="text" class="form-control" id="npt_venta_nombre_proveedor" placeholder="Estudiante" />
+
+              <input type="text" class="form-control" id="npt_estudiante_nombres" placeholder="Estudiante" />
             </div>
-              
-            <!-- NOTA1  -->
+
+            <!-- NPT NOTA1  -->
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Nota1</span>
-              <input type="text" class="form-control" id="npt_venta_nombre_proveedor" placeholder="Nota1" />
+              <input type="text" class="form-control" id="npt_nota1" placeholder="Nota1" />
+
+              <span class="input-group-text" id="inputGroup-sizing-sm">Tipo</span>
+              <select class="form-select slct_nota1_tipo" id="slct_nota1_tipo"></select>
+              <input type="hidden" class="form-control" id="npt_nota1_tipo" />
+
             </div>
 
-            <!-- NOTA2 -->
+            <!-- NPT NOTA2 -->
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Nota2</span>
-              <input type="hidden" class="form-control" id="npt_venta_costo_producto_base" />
-              <input type="text" class="form-control" id="npt_venta_costo_producto" placeholder="Nota2" />
+              <input type="text" class="form-control" id="npt_nota2" placeholder="Nota2" />
+
+              <span class="input-group-text" id="inputGroup-sizing-sm">Tipo</span>
+              <select class="form-select" id="slct_nota2_tipo"></select>
+              <input type="hidden" class="form-control" id="npt_nota2_tipo" />
+
+
             </div>
 
-            <!-- NOTA3 -->
+            <!-- NPT NOTA3 -->
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Nota3</span>
-              <input type="hidden" class="form-control" id="npt_venta_valor_venta_base" />
-              <input type="text" class="form-control" id="npt_venta_valor_venta" placeholder="Nota3" />
+              <input type="text" class="form-control" id="npt_nota3" placeholder="Nota3" />
+
+              <span class="input-group-text" id="inputGroup-sizing-sm">Tipo</span>
+              <select class="form-select" id="slct_nota3_tipo"></select>
+              <input type="hidden" class="form-control" id="npt_nota3_tipo" />
             </div>
 
-
-
-                        <!-- NOTA4 -->
+            <!-- NPT NOTA4 -->
             <div class="col-md-9 input-group input-group-sm mb-2">
-              <span class="input-group-text" id="inputGroup-sizing-sm">Nota3</span>
-              <input type="hidden" class="form-control" id="npt_venta_valor_venta_base" />
-              <input type="text" class="form-control" id="npt_venta_valor_venta" placeholder="Nota4" />
+              <span class="input-group-text" id="inputGroup-sizing-sm">Nota4</span>
+              <input type="text" class="form-control" id="npt_nota4" placeholder="Nota4" />
+
+              <span class="input-group-text" id="inputGroup-sizing-sm">Tipo</span>
+              <select class="form-select" id="slct_nota4_tipo"></select>
+              <input type="hidden" class="form-control" id="npt_nota4_tipo" />
             </div>
+
+            <!-- NPT NOTA FINAL -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Final</span>
+              <input type="text" class="form-control" id="npt_nota_final" placeholder="Nota Final" />
+
+
+              <span class="input-group-text" id="inputGroup-sizing-sm">Tipo</span>
+              <select class="form-select" id="slct_nota4_tipo"></select>
+              <input type="hidden" class="form-control" id="npt_final_tipo" />
+
+            </div>
+
+            <div class="col-md-12 gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="btn btn-primary btnModificarDomi" id="btn_agregar_nota">
+                Guardar
+              </button>
+
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                X
+              </button>
+            </div>
+
+
 
           </form>
-
-
-
-
         </div>
 
       </div>
