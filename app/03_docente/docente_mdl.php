@@ -138,30 +138,19 @@ switch ($_GET['accion']) {
     break;
 
   case 'modificar_notas':
-    $sql = "UPDATE CALIFICACIONES SET
-    cal_nota1= '$_POST[cal_nota1]',
-    cal_nota1_tipo= '$_POST[cal_nota1_tipo]',
-    cal_nota2= '$_POST[cal_nota2]',
-    cal_nota2_tipo= '$_POST[cal_nota2_tipo]',
-    cal_nota3= '$_POST[cal_nota3]',
-    cal_nota3_tipo= '$_POST[cal_nota3_tipo]',
-    cal_nota4= '$_POST[cal_nota4]',
-    cal_nota4_tipo= '$_POST[cal_nota4_tipo]',
-    cal_nota_final= '$_POST[cal_nota_final]',
-    cal_nota_final_tipo= '$_POST[cal_nota_final_tipo]'
+    $sql = "UPDATE CALIFICACIONES 
+    SET
+      cal_nota1= '$_POST[cal_nota1]',
+      cal_nota1_tipo= '$_POST[cal_nota1_tipo]',
+      cal_nota2= '$_POST[cal_nota2]',
+      cal_nota2_tipo= '$_POST[cal_nota2_tipo]',
+      cal_nota3= '$_POST[cal_nota3]',
+      cal_nota3_tipo= '$_POST[cal_nota3_tipo]',
+      cal_nota4= '$_POST[cal_nota4]',
+      cal_nota4_tipo= '$_POST[cal_nota4_tipo]',
+      cal_nota_final= '$_POST[cal_nota_final]',
+      cal_nota_final_tipo= '$_POST[cal_nota_final_tipo]'
     WHERE cal_id=$_GET[cal_id]
-    AND(
-      cal_nota1 IS NULL OR
-    cal_nota1_tipo IS NULL OR
-    cal_nota2 IS NULL OR
-    cal_nota2_tipo IS NULL OR
-    cal_nota3 IS NULL OR
-    cal_nota3_tipo IS NULL OR
-    cal_nota4 IS NULL OR
-    cal_nota4_tipo IS NULL OR
-    cal_nota_final IS NULL OR
-    cal_nota_final_tipo IS NULL
-    )
     ";
     $response = $pdo->exec($sql);
     echo json_encode($response);

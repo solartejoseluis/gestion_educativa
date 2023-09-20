@@ -5,112 +5,112 @@ document.addEventListener("DOMContentLoaded", function () {
 }); // cierre del addEventListener del inicio de pagina
 
 
-  function cargaPaginaPrincipal() {
-    $.ajax({
-      type: "POST",
-      async: false,
-      url: "docente_mdl.php?accion=carga_pagina_principal",
+function cargaPaginaPrincipal() {
+  $.ajax({
+    type: "POST",
+    async: false,
+    url: "docente_mdl.php?accion=carga_pagina_principal",
+    data: "",
+    success: function (datos) {
+      $("#npt_docente_nombres").val(datos[0].nombres_completos);
+    },
+    error: function () {
+      alert("Problema en cargar pagina principal");
+    },
+  });
+}
+
+
+// DTTBL GRUPOS ASIGNADOS ASO
+function dttblGruposAsignadosAso() {
+  var listado = $("#tbl_grupos_asignados_aso").DataTable({
+    ajax: {
+      url: "docente_mdl.php?accion=carga_dttbl_grupos_asignados_aso",
+      dataSrc: "",
       data: "",
-      success: function (datos) {
-        $("#npt_docente_nombres").val(datos[0].nombres_completos);
+    },
+    columns: [
+      { data: "grupo_id" },
+      { data: "modulo_nombre" },
+      { data: "modulo_semestre" },
+      { data: "jornada_nombre" },
+      { data: "grupo_fch_inicio" },
+      { data: "grupo_fch_fin" },
+      { data: null, orderable: false },
+    ],
+    columnDefs: [
+      {
+        targets: 6,
+        defaultContent:
+          "<button class='btn btn-outline-primary btn-sm btnVerGrupoAsignadoAso'><i class='fa-solid fa-pen'></i></button>",
+        data: null,
       },
-      error: function () {
-        alert("Problema en cargar pagina principal");
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    searching: false,
+    info: false,
+    paging: false,
+    destroy: true,
+  });
+  // BTN VER GRUPO ASIGNADO ASO
+  $("#tbl_grupos_asignados_aso tbody").on("click", "button.btnVerGrupoAsignadoAso", function () {
+    let registro = listado.row($(this).parents("tr")).data();
+    $("#mdl_calificaciones_grupo").modal("show");
+    dttbl_listar_calificaciones_grupo(registro.grupo_id);
+  });
+
+
+}
+
+// DTTBL GRUPOS ASIGNADOS MD
+function dttblGruposAsignadosMd() {
+  var listado = $("#tbl_grupos_asignados_md").DataTable({
+    ajax: {
+      url: "docente_mdl.php?accion=carga_dttbl_grupos_asignados_md",
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "grupo_id" },
+      { data: "modulo_nombre" },
+      { data: "modulo_semestre" },
+      { data: "jornada_nombre" },
+      { data: "grupo_fch_inicio" },
+      { data: "grupo_fch_fin" },
+      { data: null, orderable: false },
+    ],
+    columnDefs: [
+      {
+        targets: 6,
+        defaultContent:
+          "<button class='btn btn-primary btn-sm btnVerGrupoAsignadoMd'><i class='fa-solid fa-pen'></i></button>",
+        data: null,
       },
-    });
-  }
-
-
-  // DTTBL GRUPOS ASIGNADOS ASO
-  function dttblGruposAsignadosAso() {
-    var listado = $("#tbl_grupos_asignados_aso").DataTable({
-      ajax: {
-        url: "docente_mdl.php?accion=carga_dttbl_grupos_asignados_aso",
-        dataSrc: "",
-        data: "",
-      },
-      columns: [
-        { data: "grupo_id" },
-        { data: "modulo_nombre" },
-        { data: "modulo_semestre" },
-        { data: "jornada_nombre" },
-        { data: "grupo_fch_inicio" },
-        { data: "grupo_fch_fin" },
-        { data: null, orderable: false },
-      ],
-      columnDefs: [
-        {
-          targets: 6,
-          defaultContent:
-            "<button class='btn btn-outline-primary btn-sm btnVerGrupoAsignadoAso'><i class='fa-solid fa-pen'></i></button>",
-          data: null,
-        },
-      ],
-      language: {
-        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
-      },
-      searching: false,
-      info: false,
-      paging: false,
-      destroy: true,
-    });
-    // BTN VER GRUPO ASIGNADO ASO
-    $("#tbl_grupos_asignados_aso tbody").on("click", "button.btnVerGrupoAsignadoAso", function () {
-      let registro = listado.row($(this).parents("tr")).data();
-      $("#mdl_calificaciones_grupo").modal("show");
-      dttbl_listar_calificaciones_grupo(registro.grupo_id);
-    });
-
-
-  }
-
-  // DTTBL GRUPOS ASIGNADOS MD
-  function dttblGruposAsignadosMd() {
-    var listado = $("#tbl_grupos_asignados_md").DataTable({
-      ajax: {
-        url: "docente_mdl.php?accion=carga_dttbl_grupos_asignados_md",
-        dataSrc: "",
-        data: "",
-      },
-      columns: [
-        { data: "grupo_id" },
-        { data: "modulo_nombre" },
-        { data: "modulo_semestre" },
-        { data: "jornada_nombre" },
-        { data: "grupo_fch_inicio" },
-        { data: "grupo_fch_fin" },
-        { data: null, orderable: false },
-      ],
-      columnDefs: [
-        {
-          targets: 6,
-          defaultContent:
-            "<button class='btn btn-primary btn-sm btnVerGrupoAsignadoMd'><i class='fa-solid fa-pen'></i></button>",
-          data: null,
-        },
-      ],
-      language: {
-        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
-      },
-      searching: false,
-      info: false,
-      paging: false,
-      destroy: true,
-    });
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    searching: false,
+    info: false,
+    paging: false,
+    destroy: true,
+  });
 
 
 
-    // BTN VER GRUPO ASIGNADO MD
-    $("#tbl_grupos_asignados_md tbody").on("click", "button.btnVerGrupoAsignadoMd", function () {
-      let registro = listado.row($(this).parents("tr")).data();
-      $("#mdl_calificaciones_grupo").modal("show");
-      dttbl_listar_calificaciones_grupo(registro.grupo_id);
-    });
+  // BTN VER GRUPO ASIGNADO MD
+  $("#tbl_grupos_asignados_md tbody").on("click", "button.btnVerGrupoAsignadoMd", function () {
+    let registro = listado.row($(this).parents("tr")).data();
+    $("#mdl_calificaciones_grupo").modal("show");
+    dttbl_listar_calificaciones_grupo(registro.grupo_id);
+  });
 
 
 
 
-  } // final dttbl de grupos asignados
+} // final dttbl de grupos asignados
 
 
 // MODAL CALIFICACIONES GRUPOS  
@@ -160,14 +160,19 @@ function dttbl_listar_calificaciones_grupo(grupo_id) {
   });
 
 
-// BTN MDL AGREGAR NOTA
-    $("#tbl_calificaciones_grupo tbody").on("click", "button.btnAgregarNota", function () {
-      let registro = listado.row($(this).parents("tr")).data();
-      $("#mdl_agregar_nota").modal("show");
-      listarNotasEstudiante(registro.estudiante_id, registro.grupo_id);
-    });
+  // BTN MDL AGREGAR NOTA
+  $("#tbl_calificaciones_grupo tbody").on("click", "button.btnAgregarNota", function () {
+    let registro = listado.row($(this).parents("tr")).data();
+    $("#mdl_agregar_nota").modal("show");
+    listarNotasEstudiante(registro.estudiante_id, registro.grupo_id);
+  });
 
 }
+
+$("#btn_cerrar_mdl_calificaciones_grupo").on("click", function () {
+  $("#mdl_calificaciones_grupo").modal("hide");
+  location.reload();
+});
 
 //------------------------
 //CICLO MDL AGREGAR NOTAS
@@ -184,6 +189,59 @@ $(document).ready(function () {
   });
 });
 
+
+$(document).ready(function () {
+  $.ajax({
+    type: "POST",
+    url: "carga_slct_cal_tipo.php",
+    success: function (response) {
+      $("#slct_nota2_tipo").html(response).fadeIn();
+    },
+  });
+});
+
+
+$(document).ready(function () {
+  $.ajax({
+    type: "POST",
+    url: "carga_slct_cal_tipo.php",
+    success: function (response) {
+      $("#slct_nota3_tipo").html(response).fadeIn();
+    },
+  });
+});
+
+
+$(document).ready(function () {
+  $.ajax({
+    type: "POST",
+    url: "carga_slct_cal_tipo.php",
+    success: function (response) {
+      $("#slct_nota4_tipo").html(response).fadeIn();
+    },
+  });
+});
+
+
+$(document).ready(function () {
+  $.ajax({
+    type: "POST",
+    url: "carga_slct_cal_tipo.php",
+    success: function (response) {
+      $("#slct_nota_final_tipo").html(response).fadeIn();
+    },
+  });
+});
+
+
+
+// BTN CERRAR AGREGAR NOTA
+$("#btn_cerrar_mdl_agregar_nota").on("click", function () {
+  $("#mdl_agregar_nota").modal("hide");
+});
+
+
+
 // OJO ACTUALIZARLO!!!!
 // asigna valor select vendedor al input
 $("#slctEdit_vendedor").change(function () {
@@ -191,11 +249,11 @@ $("#slctEdit_vendedor").change(function () {
 });
 
 
-function listarNotasEstudiante(estudiante_id,grupo_id) {
+function listarNotasEstudiante(estudiante_id, grupo_id) {
   $.ajax({
     type: "GET",
     url:
-      "docente_mdl.php?accion=listar_notas_estudiante&estudiante_id="+estudiante_id+"&grupo_id="+grupo_id,
+      "docente_mdl.php?accion=listar_notas_estudiante&estudiante_id=" + estudiante_id + "&grupo_id=" + grupo_id,
     data: "",
     success: function (datos) {
       $("#npt_cal_id").val(datos[0].cal_id);
@@ -210,15 +268,15 @@ function listarNotasEstudiante(estudiante_id,grupo_id) {
       $("#npt_nota2").val(datos[0].cal_nota2);
       $("#slct_nota2_tipo").val(datos[0].cal_nota2_tipo);
       $("#npt_nota2_tipo").val(datos[0].cal_nota2_tipo);
-      
+
       $("#npt_nota3").val(datos[0].cal_nota3);
       $("#slct_nota3_tipo").val(datos[0].cal_nota3_tipo);
       $("#npt_nota3_tipo").val(datos[0].cal_nota3_tipo);
-      
+
       $("#npt_nota4").val(datos[0].cal_nota4);
       $("#slct_nota4_tipo").val(datos[0].cal_nota4_tipo);
       $("#npt_nota4_tipo").val(datos[0].cal_nota4_tipo);
-      
+
       $("#npt_nota_final").val(datos[0].cal_nota_final);
       $("#slct_nota_final_tipo").val(datos[0].cal_nota_final_tipo);
       $("#npt_nota_final_tipo").val(datos[0].cal_nota_final_tipo);
@@ -227,15 +285,13 @@ function listarNotasEstudiante(estudiante_id,grupo_id) {
       alert("Problema en listar notas estudiante");
     },
   });
+}
 
 $("#btn_agregar_nota").on("click", function () {
-  $("#mdl_agregar_nota").modal("hide");
-  let registro = recolectarAgregarNotas();
-  modificarNotas(registro);
+  //primero recolecto datos y luego muestro modal para evitar error NS_BINDING_ABORTED
+  let registroAgregaNotas = recolectarAgregarNotas();
+  modificarNotas(registroAgregaNotas);
 });
-
-
-}
 
 
 // AL CAMBIAR PASA EL VALOR DE SELECT AL INPUT
@@ -263,51 +319,37 @@ $("#slct_nota1_tipo").change(function () {
 });
 
 
-
-
-
-
-
 function recolectarAgregarNotas() {
   let registro = {
-cal_id: $("#npt_cal_id").val(),
-estudiante_id: $("#npt_estudiante_id").val(),
-grupo_id: $("#npt_grupo_id").val(),
-
-cal_nota1: $("#npt_nota1").val(),
-cal_nota1_tipo: $("#npt_nota1_tipo").val(),
-
-cal_nota2: $("#npt_nota2").val(),
-cal_nota2_tipo: $("#npt_nota2_tipo").val(),
-
-cal_nota3: $("#npt_nota3").val(),
-cal_nota3_tipo: $("#npt_nota3_tipo").val(),
-
-cal_nota4: $("#npt_nota4").val(),
-cal_nota4_tipo: $("#npt_nota4_tipo").val(),
-
-cal_nota_final: $("#npt_nota_final").val(),
-cal_nota_final_tipo: $("#npt_nota_final_tipo").val(),
+    cal_id: $("#npt_cal_id").val(),
+    estudiante_id: $("#npt_estudiante_id").val(),
+    grupo_id: $("#npt_grupo_id").val(),
+    cal_nota1: $("#npt_nota1").val(),
+    cal_nota1_tipo: $("#npt_nota1_tipo").val(),
+    cal_nota2: $("#npt_nota2").val(),
+    cal_nota2_tipo: $("#npt_nota2_tipo").val(),
+    cal_nota3: $("#npt_nota3").val(),
+    cal_nota3_tipo: $("#npt_nota3_tipo").val(),
+    cal_nota4: $("#npt_nota4").val(),
+    cal_nota4_tipo: $("#npt_nota4_tipo").val(),
+    cal_nota_final: $("#npt_nota_final").val(),
+    cal_nota_final_tipo: $("#npt_nota_final_tipo").val(),
   };
   return registro;
 }
 
-
-
 function modificarNotas(registro) {
   $.ajax({
     type: "POST",
+    async: false, // hacer que sea asincronico para sarle tiempo a ajax para cargar variable
     url:
       "docente_mdl.php?accion=modificar_notas&cal_id=" +
       registro.cal_id,
     dataSrc: "",
     data: registro,
     success: function (msg) {
-      // $("#tbl_domi_por_salir").DataTable().ajax.reload();
-      alert("nota agregaa con exito");
-    location.reload();
-    $("#mdl_calificaciones_grupo").modal("show");
-
+    alert("calificacion agregada con exito");
+      // location.reload();
     },
     error: function () {
       alert("Problema modificando");
