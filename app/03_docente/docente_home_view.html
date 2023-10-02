@@ -107,18 +107,13 @@
   <!-- fin del contenido de la pagina -->
 
 
-
   <!-- MDL CALIFICACIONES DEL GRUPO-->
   <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="mdl_calificaciones_grupo">
     <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5">CALIFICACIONES DEL GRUPO</h1>
-          <button 
-          type="button" 
-          class="btn btn-secondary" 
-          id="btn_cerrar_mdl_calificaciones_grupo"
-          >
+          <button type="button" class="btn btn-secondary" id="btn_cerrar_mdl_calificaciones_grupo">
             X
           </button>
         </div>
@@ -134,11 +129,15 @@
                       <td>Nombres</td>
                       <td>Apellidos</td>
                       <td>Nota1</td>
+                      <td>20%</td>
                       <td>Nota2</td>
+                      <td>20%</td>
                       <td>Nota3</td>
+                      <td>40%</td>
                       <td>Nota4</td>
-                      <td>Defi</td>
-                      <td>Habi</td>
+                      <td>20%</td>
+                      <td>Def</td>
+                      <td>Hab</td>
                       <td></td>
                     </tr>
                   </thead>
@@ -154,15 +153,13 @@
   <!-- fin modal-->
 
   <!-- MDL AGREGAR NOTAS -->
-  <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="mdl_agregar_nota" >
+  <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="mdl_agregar_nota">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5"> Agregar Nota</h1>
           <p>el separador decimal es el punto "." ejemplo: 4.5</p>
-          <button type="button" class="btn btn-secondary"
-          id="btn_cerrar_mdl_agregar_nota"
-          >X</button>
+          <button type="button" class="btn btn-secondary" id="btn_cerrar_mdl_agregar_nota">X</button>
         </div>
         <div class="modal-body">
 
@@ -173,12 +170,9 @@
               <input type="hidden" class="form-control" id="npt_estudiante_id" />
               <input type="hidden" class="form-control" id="npt_grupo_id" />
             </div>
-
-
             <!--  NPT ESTUDIANTE -->
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Estudiante</span>
-
               <input type="text" class="form-control" id="npt_estudiante_nombres" placeholder="Estudiante" />
             </div>
 
@@ -186,59 +180,53 @@
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Nota1</span>
               <input type="text" class="form-control" id="npt_nota1" placeholder="Nota1" />
-
               <span class="input-group-text" id="inputGroup-sizing-sm">Tipo</span>
               <select class="form-select slct_nota1_tipo" id="slct_nota1_tipo"></select>
               <input type="hidden" class="form-control" id="npt_nota1_tipo" />
-
+              <span class="input-group-text" id="inputGroup-sizing-sm">20%</span>
+              <input type="text" class="form-control" id="npt_nota1_pond" disabled />
             </div>
 
             <!-- NPT NOTA2 -->
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Nota2</span>
               <input type="text" class="form-control" id="npt_nota2" placeholder="Nota2" />
-
               <span class="input-group-text" id="inputGroup-sizing-sm">Tipo</span>
               <select class="form-select" id="slct_nota2_tipo"></select>
               <input type="hidden" class="form-control" id="npt_nota2_tipo" />
-
-
+              <span class="input-group-text" id="inputGroup-sizing-sm">20%</span>
+              <input type="text" class="form-control" id="npt_nota2_pond" disabled />
             </div>
 
             <!-- NPT NOTA3 -->
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Nota3</span>
               <input type="text" class="form-control" id="npt_nota3" placeholder="Nota3" />
-
               <span class="input-group-text" id="inputGroup-sizing-sm">Tipo</span>
               <select class="form-select" id="slct_nota3_tipo"></select>
               <input type="hidden" class="form-control" id="npt_nota3_tipo" />
+              <span class="input-group-text" id="inputGroup-sizing-sm">40%</span>
+              <input type="text" class="form-control" id="npt_nota3_pond" disabled />
             </div>
 
             <!-- NPT NOTA4 -->
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Nota4</span>
               <input type="text" class="form-control" id="npt_nota4" placeholder="Nota4" />
-
               <span class="input-group-text" id="inputGroup-sizing-sm">Tipo</span>
               <select class="form-select" id="slct_nota4_tipo"></select>
               <input type="hidden" class="form-control" id="npt_nota4_tipo" />
+              <span class="input-group-text" id="inputGroup-sizing-sm">20%</span>
+              <input type="text" class="form-control" id="npt_nota4_pond" disabled />
             </div>
 
             <!-- NPT NOTA FINAL -->
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Final</span>
-              <input type="text" class="form-control" id="npt_nota_final" placeholder="Nota Final" />
-
-
-              <span class="input-group-text" id="inputGroup-sizing-sm">Tipo</span>
-              <select class="form-select" id="slct_nota_final_tipo"></select>
-              <input type="hidden" class="form-control" id="npt_nota_final_tipo" />
-
+              <input type="text" class="form-control" id="npt_nota_final" placeholder="Nota Final" disabled />
             </div>
-
             <div class="col-md-12 gap-2 d-md-flex justify-content-md-end">
-              <button type="submit" class="btn btn-primary btnModificarDomi" id="btn_agregar_nota">
+              <button type="" class="btn btn-primary" id="btn_agregar_nota">
                 Guardar
               </button>
             </div>

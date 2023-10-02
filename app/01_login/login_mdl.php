@@ -6,7 +6,10 @@ $nptUser = $_POST['npt_user'];
 $nptPassword = $_POST['npt_password'];
 
 // CONECTAR BASE DE DATOS
-$conn = @mysqli_connect("localhost", "kiron", "123456","GESTIONACADEMICA");
+$conn = @mysqli_connect("localhost", "kiron", "123456", "GESTIONACADEMICA");
+
+//$conn = @mysqli_connect("localhost", "escuelamdb_wp21", "blanco2020_EMDB!", "escuelamdb_GESTIONACADEMICA01");
+
 if (!$conn){
   echo "Fallo al conectar la bd";
 }else{
@@ -16,6 +19,7 @@ if (!$conn){
     }else{$count='0';
       }
   };
+  
 // capturar array con resultados
 while ($fila = mysqli_fetch_array($resultado)){
   $usuarioUser = $fila['usuario_user'];
@@ -34,11 +38,12 @@ if ($count=='1'){
       $_SESSION['usuario_user'] = $usuarioUser;
       $_SESSION['usuario_password'] = $usuarioPassword;
       $_SESSION['usuario_id'] = $usuarioId;
-      echo '<meta http-equiv="REFRESH"content="0;url=../03_docente/docente_home_view.html">';
+      echo '<meta http-equiv="REFRESH"content="0;url=../03_docente_v01/docente_home_view.html">';
       break;
 
     case '2': // perfil estudiante
 
+      echo '<meta http-equiv="REFRESH"content="0;url=../04_coordinador/coord_home_view.html">';
       break;
 
     case '3': //perfil administrativo

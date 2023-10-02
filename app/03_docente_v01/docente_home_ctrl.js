@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
   cargaPaginaPrincipal();
   dttblGruposAsignadosAso();
   dttblGruposAsignadosMd();
+  $("#seccion_grupos_asignados").show();
+  $("#seccion_calificaciones_grupo").hide();
+  $("#seccion_agregar_notas").hide();
 }); // cierre del addEventListener del inicio de pagina
 
 
@@ -58,13 +61,14 @@ function dttblGruposAsignadosAso() {
   $("#tbl_grupos_asignados_aso tbody").on("click", "button.btnVerGrupoAsignadoAso", function () {
     let registro = listado.row($(this).parents("tr")).data();
     $("#mdl_calificaciones_grupo").modal("show");
+    $("#seccion_grupos_asignados").hide();
     dttbl_listar_calificaciones_grupo(registro.grupo_id);
   });
 
 
 }
 
-// DTTBL GRUPOS ASIGNADOS MD
+// SECCION GRUPOS ASIGNADOS MD
 function dttblGruposAsignadosMd() {
   var listado = $("#tbl_grupos_asignados_md").DataTable({
     ajax: {
@@ -98,22 +102,33 @@ function dttblGruposAsignadosMd() {
     destroy: true,
   });
 
-
-
   // BTN VER GRUPO ASIGNADO MD
   $("#tbl_grupos_asignados_md tbody").on("click", "button.btnVerGrupoAsignadoMd", function () {
     let registro = listado.row($(this).parents("tr")).data();
-    $("#mdl_calificaciones_grupo").modal("show");
+    // $("#mdl_calificaciones_grupo").modal("show");
+    $("#seccion_grupos_asignados").hide();
+    $("#seccion_calificaciones_grupo").show();
     dttbl_listar_calificaciones_grupo(registro.grupo_id);
   });
 
 
+} // final seccion de grupos asignados
 
 
-} // final dttbl de grupos asignados
+// BTN REGRESA A GRUPOS ASIGNADOS
+$("#btn_back_grupos_asignados").on("click", function () {
+  $("#seccion_grupos_asignados").show();
+  $("#seccion_calificaciones_grupo").hide();
+  cargaPaginaPrincipal();
+  dttblGruposAsignadosAso();
+  dttblGruposAsignadosMd();
+  // dttbl_listar_calificaciones_grupo(registro.grupo_id);
+});
 
 
-// MODAL CALIFICACIONES GRUPOS  
+
+
+// dttbl CALIFICACIONES GRUPOS  
 function dttbl_listar_calificaciones_grupo(grupo_id) {
   turno_id = $("#npt_turno_id_actual").val();
   user_id = $("#npt_user_id_actual").val();
@@ -215,16 +230,19 @@ function dttbl_listar_calificaciones_grupo(grupo_id) {
     },
     info: false,
     searching: false,
-    ordering:false,
+    ordering: false,
     paging: false,
     destroy: true,
   });
 
 
-  // BTN MDL AGREGAR NOTA
+  // BTN AGREGAR NOTA
   $("#tbl_calificaciones_grupo tbody").on("click", "button.btnAgregarNota", function () {
     let registro = listado.row($(this).parents("tr")).data();
-    $("#mdl_agregar_nota").modal("show");
+    $("#seccion_grupos_asignados").hide();
+    $("#seccion_calificaciones_grupo").hide();
+    $("#seccion_agregar_notas").show();
+    // $("#mdl_agregar_nota").modal("show");
     listarNotasEstudiante(registro.estudiante_id, registro.grupo_id);
   });
 
@@ -295,7 +313,6 @@ $(document).ready(function () {
 });
 
 
-
 // BTN CERRAR AGREGAR NOTA
 $("#btn_cerrar_mdl_agregar_nota").on("click", function () {
   $("#mdl_agregar_nota").modal("hide");
@@ -348,7 +365,6 @@ function listarNotasEstudiante(estudiante_id, grupo_id) {
   });
 }
 
-
 // AL CAMBIAR PASA EL VALOR DE SELECT AL INPUT
 $("#slct_nota1_tipo").change(function () {
   $("#npt_nota1_tipo").val($(this).val());
@@ -376,9 +392,19 @@ $("#slct_nota1_tipo").change(function () {
 
 $("#btn_agregar_nota").on("click", function () {
   //primero recolecto datos y luego muestro modal para evitar error NS_BINDING_ABORTED
+  $("#seccion_grupos_asignados").hide();
+// INSERTA AQUI LA FUNCION QUE ACTUALIZA LA SECCION DE CALIFICACIONES DEL GRUPO
+
+// recojo el grupo_id en el input de esta vista:
+let grupo_id = $("#npt_grupo_id").val();
+// lo paso a la funcion que regarga el datatables
+    dttbl_listar_calificaciones_grupo(grupo_id);
+  $("#seccion_calificaciones_grupo").show();
+  $("#seccion_agregar_notas").hide();
   let registroAgregaNotas = recolectarAgregarNotas();
   modificarNotas(registroAgregaNotas);
-  // $("#mdl_calificaciones_grupo").modal("show");
+
+
 });
 
 function recolectarAgregarNotas() {
@@ -404,14 +430,17 @@ function modificarNotas(registro) {
   $.ajax({
     type: "POST",
     async: false, // hacer que sea asincronico para sarle tiempo a ajax para cargar variable
-    url:"docente_mdl.php?accion=modificar_notas&cal_id=" +
-    registro.cal_id,
+    url: "docente_mdl.php?accion=modificar_notas&cal_id=" +
+      registro.cal_id,
     dataSrc: "",
     data: registro,
     success: function (msg) {
       //alert("calificacion agregada con exito");
       // location.reload();
       // $("#mdl_calificaciones_grupo").modal("show");
+        $("#seccion_grupos_asignados").hide();
+  $("#seccion_calificaciones_grupo").show();
+  $("#seccion_agregar_notas").hide();
     },
     error: function () {
       alert("Problema modificando");
